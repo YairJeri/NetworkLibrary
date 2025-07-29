@@ -26,13 +26,15 @@ namespace network {
         {
             std::scoped_lock lock(mutex_);
             queue_.emplace_back(std::move(item));
-                    }
+            cv_.notify_one();
+        }
 
         void push_front(const T& item)
         {
             std::scoped_lock lock(mutex_);
             queue_.emplace_front(std::move(item));
-                    }
+            cv_.notify_one();
+        }
 
 
         T pop_front()
@@ -57,7 +59,12 @@ namespace network {
             queue_.clear();
         }
 
-        
+        void wait()
+        {
+            std::unique_lock<std::mutex> ul(mutex_);
+            cv_.wait(ul, [&](){return !queue_.empty();});
+        }
+
         bool empty()
         {
             std::scoped_lock lock(mutex_);
@@ -73,5 +80,6 @@ namespace network {
     protected:
         std::mutex mutex_;
         std::deque<T> queue_;
-            };
+        std::condition_variable cv_;
+    };
 }
