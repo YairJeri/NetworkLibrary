@@ -216,7 +216,7 @@ namespace network
 namespace network
 {
     template<typename T>
-    // forward declarations
+    class session; // Adelanto
 
     template<typename T>
     class connection
@@ -407,7 +407,6 @@ namespace network
 
         owner owner_type_ = owner::server;
 
-        // Future session back-ref
-        uint32_t client_id_ = 0;
+        std::weak_ptr<session<T>> owner_session_;  // ← esta es la clave del nuevo diseño
     };
 }
