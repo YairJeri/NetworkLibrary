@@ -7,3 +7,4 @@
 #include "network_connection.h"
 #include "network_session.h"
 #include "network_server.h"
+#include "network_client.h"
