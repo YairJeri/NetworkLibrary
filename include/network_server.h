@@ -23,7 +23,7 @@ namespace network
         {
             try {
                 WaitForClientConnection();
-                // StartUDPListener();
+                StartUDPListener();
                 context_thread_ = std::thread([this]() { io_context_.run(); });
             } catch (const std::exception& e) {
                 std::cerr << "[SERVER] Exception: " << e.what() << "\n";
@@ -102,7 +102,7 @@ namespace network
                         {
                             if (body_size < sizeof(uint32_t)) {
                                 std::cerr << "[SERVER] Malformed UDP auth packet\n";
-                                // StartUDPListener();
+                                StartUDPListener();
                                 return;
                             }
                             
@@ -151,7 +151,7 @@ namespace network
                         }
                     }
 
-                    // StartUDPListener();
+                    StartUDPListener();
                 });
         }
 
