@@ -35,7 +35,7 @@ namespace network
                 connection_->ConnectToServer(endpoints_tcp);
 
                 udp_socket_.open(asio::ip::udp::v4());
-                // StartUDPReceive();
+                StartUDPReceive();
 
                 server_udp_endpoint_ = *endpoints_udp.begin();
 
