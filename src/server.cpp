@@ -28,7 +28,6 @@ protected:
         }
         virtual void OnClientDisconnect(std::shared_ptr<network::session<CustomMsgTypes>> client) 
         {
-		    // Client disconnected
 		    std::cout << "Removing client [" << client->GetID() << "]\n";
         }
         virtual void OnPackage(std::shared_ptr<network::session<CustomMsgTypes>> client, network::package<CustomMsgTypes>& pkg) 
