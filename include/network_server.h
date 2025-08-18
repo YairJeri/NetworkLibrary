@@ -126,7 +126,7 @@ namespace network
                         {
                             std::shared_ptr<session<T>> matched_session = nullptr;
 
-                            // Búsqueda manual: tenemos que recorrer el mapa para encontrar por endpoint
+                            // Búsqueda lineal de endpoint registrado en mapa para encontrar por endpoint
                             for (uint32_t id = 10000; id < client_id_counter_; ++id)
                             {
                                 auto opt_sess = sessions_.get(id);
