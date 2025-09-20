@@ -51,7 +51,6 @@ protected:
                 network::package<CustomMsgTypes> pkg;
                 pkg.header.id = CustomMsgTypes::PackageAll;
                 pkg << client->GetID();
-                // Broadcast to all except sender
                 SendToAll(pkg, client->GetID());
 
             }
