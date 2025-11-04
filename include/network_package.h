@@ -65,6 +65,11 @@ namespace network
         {
             static_assert(std::is_standard_layout<DataType>::value, "Data is too complex");
             
+            if (pkg.body.size() < sizeof(DataType))
+            {
+                throw std::runtime_error("[PACKAGE] Deserialization error: underflow while reading data");
+            }
+
             size_t i = pkg.body.size() - sizeof(DataType);
 
             std::memcpy(&data, pkg.body.data() + i, sizeof(DataType));
