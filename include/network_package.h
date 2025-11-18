@@ -60,6 +60,38 @@ namespace network
             return pkg;
         }
 
+        // Serialización para std::string (longitud + bytes)
+        friend package<T>& operator << (package<T>& pkg, const std::string& str)
+        {
+            uint32_t len = static_cast<uint32_t>(str.size());
+            size_t i = pkg.body.size();
+            pkg.body.resize(i + len);
+            if (len > 0)
+            {
+                std::memcpy(pkg.body.data() + i, str.data(), len);
+            }
+            pkg << len; // almacena el tamaño al final para lectura LIFO
+            return pkg;
+        }
+
+        friend package<T>& operator >> (package<T>& pkg, std::string& str)
+        {
+            uint32_t len = 0;
+            pkg >> len; // primero extraemos la longitud
+
+            if (pkg.body.size() < len)
+            {
+                throw std::runtime_error("[PACKAGE] Deserialization error: underflow while reading string");
+            }
+
+            size_t i = pkg.body.size() - len;
+            str.assign(reinterpret_cast<const char*>(pkg.body.data() + i), len);
+            pkg.body.resize(i);
+            pkg.header.size = pkg.size();
+
+            return pkg;
+        }
+
         template<typename DataType>
         friend package<T>& operator >> (package<T>& pkg, DataType& data)
         {
