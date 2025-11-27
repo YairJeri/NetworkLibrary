@@ -13,3 +13,8 @@ add_executable(server src/server.cpp)
 # Ejecutable del cliente
 add_executable(client src/client.cpp)
 
+# Tests unitarios
+enable_testing()
+add_executable(unit_tests tests/test_network.cpp)
+add_test(NAME unit_tests COMMAND unit_tests)
+
