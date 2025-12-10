@@ -18,3 +18,6 @@ enable_testing()
 add_executable(unit_tests tests/test_network.cpp)
 add_test(NAME unit_tests COMMAND unit_tests)
 
+# Benchmarks
+add_executable(benchmark benchmarks/benchmark.cpp)
+
