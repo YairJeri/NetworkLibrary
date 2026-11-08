@@ -2,6 +2,8 @@
 
 A lightweight, asynchronous multithreaded networking engine built in modern C++17 with Asio (standalone or Boost.Asio). Designed for low-latency client-server architectures, supporting a hybrid transport model: **TCP** for reliable handshakes, session management, and state sync; and **UDP** for rapid, unchoked datagram exchange.
 
+*Read this in [Español](README.es.md).*
+
 ## Features
 
 - **Hybrid Transport Architecture:**
@@ -79,6 +81,7 @@ ctest --test-dir build --output-on-failure
 .
 ├── CMakeLists.txt
 ├── README.md
+├── README.es.md
 ├── include/
 │   ├── network.h               # Main umbrella header
 │   ├── network_core.h          # Core headers, Asio detection, and platform macros
